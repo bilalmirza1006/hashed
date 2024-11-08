@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tailwind & JavaScript Project</title>
+    <link href="./build.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="../output.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/3.7.0/mapbox-gl.css" rel="stylesheet" />
+
+    <!-- <meta charset="UTF-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <title>Mapbox Map</title> -->
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <style>
+        /* Set the dimensions of the map container */
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body class="  w-full">
+
+    <div class=" mx-auto h-[44px] flex bg-[#013D29] justify-between items-center p-4 ">
+        <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 bg-[#013D29] text-white rounded-full flex items-center justify-center">
+                <i class="fa fa-bell" style="font-size: 24px;"></i>
+            </div>
+            <div>
+                <h2 class="text-sm font-normal text-white">Delivery lead time will be impacted due to COVID-19. Stay
+                    safe!</h2>
+            </div>
+        </div>
+        <div class="flex space-x-4 justify-between text-sm items-center">
+            <div><span class="text-[#669082] text-sm font-normal">Select language:</span></div>
+            <div class="flex">
+                <div id="english" class="cursor-pointer p-2 hover:text-white rounded-md text-[#669082]"
+                    onclick="changeLanguage('English')">English
+                </div>
+                <div class="border-l-2 border-[#669082] "></div>
+                <div id="french" class="cursor-pointer p-2 hover:text-white rounded-md text-[#669082]"
+                    onclick="changeLanguage('French')">French</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class=" mx-auto  p-4 h-[80px] text-red-500">
+        <div class=" mx-auto px-8 flex  justify-between items-center">
+            <div class="flex items-center space-x-6">
+                <div class="w-[136px] h-[44px]">
+                    <img src="../docs/assets/image/Deelly-Logo.png" alt="Logo" class="w-full h-auto" />
+                </div>
+                <div>
+                    <select
+                        class="rounded-full w-[160px] h-[40px] border-2 border-green-800 bg-white text-gray-800 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#219653]">
+
+                        <option>Select one</option>
+                        <option> <i class="fa fa-user-plus text-white mr-2" aria-hidden="true"></i>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="relative ">
+                    <input type="text" placeholder="Search..."
+                        class="rounded-lg h-11 border-2 border-gray-300 w-[288px]  pl-10 pr-4 text-gray-800" />
+                    <i class="fa fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                        aria-hidden="true"></i>
+                </div>
+
+                <div class="relative inline-block text-left">
+                    <button id="dropdownButton" onclick="toggleDropdown()"
+                        class="w-11 h-11 flex items-center justify-center text-white px-2 py-2 rounded-xl"
+                        style="background: linear-gradient(93.17deg, #5ACD84 -22.23%, #56AEFF 106.85%);">
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    </button>
+
+                    <div id="dropdownMenu"
+                        class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden z-10">
+                        <ul class="py-2">
+                            <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                    <i class="fa fa-user text-black mr-4" aria-hidden="true"></i>
+                                    Customer Login
+                                </a></li>
+                            <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                    <i class="fa fa-user text-black mr-4" aria-hidden="true"></i>
+                                    Merchant Login
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleDropdown() {
+                        const dropdown = document.getElementById('dropdownMenu');
+                        dropdown.classList.toggle('hidden');
+                    }
+                </script>
+
+
+                <div class="rounded-full relative flex items-center justify-center w-9 h-9 p-2 bg-gray-300">
+                    <i class="fa fa-cart-plus text-black" aria-hidden="true"></i>
+                    <div
+                        class="absolute top-0 right-0 bg-red-900 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full border-2 border-white transform translate-x-1/4 -translate-y-1/4">
+                        01
+                    </div>
+                </div>
+
+                <div class="rounded-full flex items-center justify-center w-9 h-9 p-2 bg-gray-300 ">
+                    <i class="fa fa-user text-black" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="h-16 p-4 flex flex-wrap items-center border-t-2">
+        <ul id="menuList" class="flex space-x-32"></ul>
+    </div>
+
+    <main class="">
+        <div class=" bg-gray-200 pb-16 flex flex-col items-center justify-center">
+            <div class="grid  relative grid-cols-12 ">
+                <div class="bg-green-100  flex flex-col justify-center items-center    pl-16 col-span-7  overflow-hidden"
+                    style="padding-bottom: 100px;">
+                    <div class="w-full" style="width: 540px;">
+                        <div class="mt-16">
+                            <span class=" text-6xl font-bold">Get The Best <span class="text-green-500"> Deals</span>
+                                Near
+                                By You!</span>
+                        </div>
+                        <div class=" mt-4  mb-16">
+                            <span class="">Explore nearby deals on map and buy deals to enjoy quality food with your
+                                family</span>
+                        </div>
+                        <button class="px-4 py-2 bg-green-800 text-white rounded-full hover:bg-green-400">Get
+                            Offer</button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-200 col-span-5 ">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+
+            <div class=" max-w-7xl  ">
+                <div class="h-[142px] pt-32">
+                </div>
+                <div id="item-container"
+                    class="flex flex-wrap justify-center gap-16    border-b-2 border-gray-500 pb-14">
+                </div>
+
+                <div class="flex items-center justify-between  flex-wrap p-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12">
+                            <img src="../docs/assets/image/Frame (1).png" alt="Image 1"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-60">
+                            <span class="text-xl font-semibold">Item 1</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="border-l-2 border-gray-500  h-16"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12">
+                            <img src="../docs/assets/image/Frame (1).png" alt="Image 1"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-60">
+                            <span class="text-xl font-semibold">Item 1</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                    <div class="border-l-2 border-gray-500  h-16"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12">
+                            <img src="../docs/assets/image/Frame (1).png" alt="Image 1"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-60">
+                            <span class="text-xl font-semibold">Item 1</span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl p-6 absolute -bottom-12 transform -translate-y-1/2 bg-white shadow-md rounded-lg">
+
+                <div class="w-full grid grid-cols-3  gap-2  mb-2">
+
+                    <select id="dinner"
+                        class="rounded-lg bg-[#F9F9F9]  border-2 border-gray-300 py-2 px-4 focus:outline-none focus:border-blue-500">
+                        <option value="">Select Dinner</option>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                    </select>
+
+                    <select id="selectAll"
+                        class="rounded-lg bg-[#F9F9F9] w-ful border-2 border-gray-300 py-2 px-4 focus:outline-none focus:border-blue-500">
+                        <option value="">Select All</option>
+                        <option value="all">All Options</option>
+                        <option value="some">Some Options</option>
+                    </select>
+
+                    <select id="subcategory"
+                        class="rounded-lg bg-[#F9F9F9] w-ful border-2 border-gray-300 py-2 px-4 focus:outline-none focus:border-blue-500">
+                        <option value="">Select Subcategory</option>
+                        <option value="appetizer">Appetizer</option>
+                        <option value="main-course">Main Course</option>
+                        <option value="dessert">Dessert</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-4 gap-2 ">
+
+                    <select id="lahore"
+                        class="rounded-lg bg-[#F9F9F9] border-2 border-gray-300 py-2 px-4 focus:outline-none focus:border-blue-500">
+                        <option value="">Select Lahore</option>
+                        <option value="central">Central Lahore</option>
+                        <option value="south">South Lahore</option>
+                        <option value="north">North Lahore</option>
+                    </select>
+
+                    <select id="destination"
+                        class="rounded-lg bg-[#F9F9F9] border-2 border-gray-300 py-2 px-4 focus:outline-none focus:border-blue-500">
+                        <option value="">Select Destination</option>
+                        <option value="paris">Paris</option>
+                        <option value="tokyo">Tokyo</option>
+                        <option value="new-york">New York</option>
+                    </select>
+
+                    <input type="text" id="search" placeholder="Search..."
+                        class="rounded-lg bg-[#F9F9F9] border-2 border-gray-300 py-2 px-4 focus:outline-none focus:border-blue-500">
+
+                    <button class="px-4 py-2 bg-green-800 text-white rounded-full hover:bg-green-400">Get Offer</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="pt-32  px-28">
+
+            <div class="flex px-10 justify-between items-center flex-wrap">
+                <div>
+
+                    <div>
+                        <span class="text-6xl font-semibold">Nearby <span class="text-green-400">Deals</span></span>
+                    </div>
+                    <div>
+                        <span class="text-sm font-normal ">
+                            Explore nearby deals on map and buy deals to enjoy quality food with your family
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <button
+                        class="bg-green-900 text-white text-base font-bold py-2 px-6 rounded-full shadow-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                        View on map
+                    </button>
+                </div>
+            </div>
+
+
+            <div id="cardsContainer"
+                class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-14 mx-auto pb-32 p-6">
+
+            </div>
+            <script>
+                const cardsData = [
+                    {
+                        dealName: "Deal 1",
+                        locations: ["Karachi", "Lahore", "Islamabad", "Quetta", "Peshawar"],
+                        userName: "Ali Khan",
+                        dealDiscount: "Flat 15% Off",
+                        imageSrc: "../docs/assets/image/Rectangle 5950.png",
+                        userImage: "../docs/assets/image/Ellipse 2174.png"
+                    },
+                    {
+                        dealName: "Deal 2",
+                        locations: ["Karachi", "Faisalabad", "Rawalpindi", "Multan"],
+                        userName: "Sara Ahmad",
+                        dealDiscount: "Flat 20% Off",
+                        imageSrc: "../docs/assets/image/Rectangle 5950.png",
+                        userImage: "../docs/assets/image/Ellipse 2174.png"
+                    },
+                    {
+                        dealName: "Deal 3",
+                        locations: ["Lahore", "Sialkot"],
+                        userName: "Usman Shah",
+                        dealDiscount: "Flat 10% Off",
+                        imageSrc: "../docs/assets/image/Rectangle 5950.png",
+                        userImage: "../docs/assets/image/Ellipse 2174.png"
+                    }
+                ];
+
+                function generateCards() {
+                    const container = document.getElementById("cardsContainer");
+                    container.innerHTML = "";
+
+                    cardsData.forEach((card, index) => {
+                        const cardElement = document.createElement("div");
+                        cardElement.classList.add("w-96", "mx-auto", "bg-white", "rounded-lg", "shadow-md");
+
+                        cardElement.innerHTML = `
+                            <div class="relative">
+                                <img src="${card.imageSrc}" alt="Image 1" class="w-full h-auto rounded-t-lg">
+                                <button onclick="toggleHeart(${index})" id="heartBtn${index}" class="absolute top-2 right-2 text-white focus:outline-none w-10 h-10 flex items-center justify-center bg-green-400 rounded-full">
+                                    <i id="heartIcon${index}" class="fa fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <div class="mt-4 flex items-center justify-between">
+                                    <div class="text-yellow-500">
+                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+                                    </div>
+                                    <div class="ml-4 flex items-center text-gray-500">
+                                        <img src="../docs/assets/image/Layer_1.png" alt="Star Icon" class="w-6 h-6 mr-2">
+                                        <span class="text-black">${card.dealDiscount}</span>
+                                    </div>
+                                </div>
+                                <div class="mt-6">
+                                    <div class="font-semibold text-lg">${card.dealName}</div>
+                                    <div class="text-gray-600 flex items-center">
+                                        <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                        ${card.locations[0]}
+                                    </div>
+                                    <div class="flex items-center relative">
+                                        <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                        ${card.locations[1]}
+                                        <button id="seeMoreBtn${index}" onmouseover="showInfoBox(${index})" onmouseout="hideInfoBox(${index})"
+                                            onclick="showModal(${index})" class="text-green-700 ml-2 underline hover:text-blue-500">+${card.locations.length - 2} More</button>
+                                        <div id="infoBox${index}" class="absolute bottom-full mb-2 right-24 bg-white border border-green-800 shadow-lg rounded-lg p-3 w-48 opacity-0 invisible transition-opacity duration-300">
+                                            <p class="font-semibold mb-1">Other Locations:</p>
+                                            ${card.locations.slice(2).map(location => `
+                                                <div class="text-gray-600 flex items-center">
+                                                    <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                                    ${location}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    <div id="locationModal${index}" class="hidden fixed inset-0 bg-gray-500 bg-opacity-50 z-10 flex justify-center items-center">
+                                        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                                            <div class="font-semibold text-lg mb-4">Other Locations</div>
+                                            ${card.locations.slice(2).map(location => `
+                                                <div class="text-gray-600 flex items-center">
+                                                    <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                                    ${location}
+                                                </div>
+                                            `).join('')}
+                                            <button onclick="hideModal(${index})" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+                                    <div class="flex items-center">
+                                        <img src="${card.userImage}" alt="User Image" class="w-10 h-10 rounded-full mr-2">
+                                        <span class="font-semibold">${card.userName}</span>
+                                    </div>
+                                    <button class="px-4 py-2 bg-green-800 text-white rounded-full hover:bg-green-400">Get Offer</button>
+                                </div>
+                            </div>
+                        `;
+
+                        container.appendChild(cardElement);
+                    });
+                }
+
+                function toggleHeart(index) {
+                    const heartIcon = document.getElementById(`heartIcon${index}`);
+                    heartIcon.classList.toggle('text-red-500');
+                }
+
+                function showInfoBox(index) {
+                    const infoBox = document.getElementById(`infoBox${index}`);
+                    infoBox.classList.remove('opacity-0', 'invisible');
+                    infoBox.classList.add('opacity-100', 'visible');
+                }
+
+                function hideInfoBox(index) {
+                    const infoBox = document.getElementById(`infoBox${index}`);
+                    infoBox.classList.add('opacity-0', 'invisible');
+                    infoBox.classList.remove('opacity-100', 'visible');
+                }
+
+                function showModal(index) {
+                    const modal = document.getElementById(`locationModal${index}`);
+                    modal.classList.remove('hidden');
+                }
+
+                function hideModal(index) {
+                    const modal = document.getElementById(`locationModal${index}`);
+                    modal.classList.add('hidden');
+                }
+
+                generateCards();
+            </script>
+
+        </div>
+
+        <div class="bg-old-lace">
+            <div class=" px-28 ">
+                <div id="cardsContainer1"
+                    class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-14 mx-auto pb-32 p-6">
+                </div>
+                <div class="flex px-10 justify-between items-center flex-wrap mt-12">
+                    <div>
+                        <div>
+                            <span class="text-6xl font-semibold">Hot <span class="text-green-400">Deals</span></span>
+                        </div>
+                        <div>
+                            <span class="text-sm font-normal">
+                                Discover the best deals available right now and save big on your favorite items
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            class="bg-green-900 text-white text-base font-bold py-2 px-6 rounded-full shadow-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+                            View Hot Deals
+                        </button>
+                    </div>
+                </div>
+                <div id="cardsContainer2"
+                    class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-14 mx-auto pb-32 p-6">
+                </div>
+            </div>
+            <script>
+                const cardsData2 = [
+                    {
+                        dealName: "Deal 1",
+                        locations: ["Karachi", "Lahore", "Islamabad", "Quetta", "Peshawar"],
+                        userName: "Ali Khan",
+                        dealDiscount: "Flat 15% Off",
+                        imageSrc: "../docs/assets/image/Rectangle 5950.png",
+                        userImage: "../docs/assets/image/Ellipse 2174.png"
+                    },
+                    {
+                        dealName: "Deal 2",
+                        locations: ["Karachi", "Faisalabad", "Rawalpindi", "Multan"],
+                        userName: "Sara Ahmad",
+                        dealDiscount: "Flat 20% Off",
+                        imageSrc: "../docs/assets/image/Rectangle 5950.png",
+                        userImage: "../docs/assets/image/Ellipse 2174.png"
+                    },
+                    {
+                        dealName: "Deal 3",
+                        locations: ["Lahore", "Sialkot"],
+                        userName: "Usman Shah",
+                        dealDiscount: "Flat 10% Off",
+                        imageSrc: "../docs/assets/image/Rectangle 5950.png",
+                        userImage: "../docs/assets/image/Ellipse 2174.png"
+                    }
+                ];
+
+                function generateCards2(containerId) {
+                    const container = document.getElementById(containerId);
+                    container.innerHTML = "";
+
+                    cardsData2.forEach((card, index) => {
+                        const cardElement = document.createElement("div");
+                        cardElement.classList.add("w-96", "mx-auto", "bg-white", "rounded-lg", "shadow-md");
+
+                        cardElement.innerHTML = `
+                        <div class="relative">
+                            <img src="${card.imageSrc}" alt="Image 1" class="w-full h-auto rounded-t-lg">
+                            <button id="heartBtn2_${index}" onclick="toggleHeart2(${index})" class="absolute top-2 right-2 text-white hover:text-red-500 focus:outline-none w-10 h-10 flex items-center justify-center bg-green-400 rounded-full">
+                                <i id="heartIcon2_${index}" class="fa fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="mt-4 flex items-center justify-between">
+                                <div class="text-yellow-500">
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i>
+                                </div>
+                                <div class="ml-4 flex items-center text-gray-500">
+                                    <img src="../docs/assets/image/Layer_1.png" alt="Star Icon" class="w-6 h-6 mr-2">
+                                    <span class="text-black">${card.dealDiscount}</span>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <div class="font-semibold text-lg">${card.dealName}</div>
+                                <div class="text-gray-600 flex items-center">
+                                    <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                    ${card.locations[0]}
+                                </div>
+                                <div class="flex items-center relative">
+                                    <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                    ${card.locations[1]}
+                                    <button id="seeMoreBtn2_${index}" onmouseover="showInfoBox2(${index})" onmouseout="hideInfoBox2(${index})"
+                                        onclick="showModal2(${index})" class="text-green-700 ml-2 underline hover:text-blue-500">+${card.locations.length - 2} More</button>
+                                    <div id="infoBox2_${index}" class="absolute bottom-full mb-2 right-24 bg-white border border-green-800 shadow-lg rounded-lg p-3 w-48 opacity-0 invisible transition-opacity duration-300">
+                                        <p class="font-semibold mb-1">Other Locations:</p>
+                                        ${card.locations.slice(2).map(location => `
+                                            <div class="text-gray-600 flex items-center">
+                                                <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                                ${location}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+            
+                                <div id="locationModal2_${index}" class="hidden fixed inset-0 bg-gray-500 bg-opacity-50 z-10 flex justify-center items-center">
+                                    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+                                        <div class="font-semibold text-lg mb-4">Other Locations</div>
+                                        ${card.locations.slice(2).map(location => `
+                                            <div class="text-gray-600 flex items-center">
+                                                <img src="../docs/assets/image/Location.png" alt="Location Icon" class="w-3 h-3 mr-2">
+                                                ${location}
+                                            </div>
+                                        `).join('')}
+                                        <button onclick="hideModal2(${index})" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+                                <div class="flex items-center">
+                                    <img src="${card.userImage}" alt="User Image" class="w-10 h-10 rounded-full mr-2">
+                                    <span class="font-semibold">${card.userName}</span>
+                                </div>
+                                <button class="px-4 py-2 bg-green-800 text-white rounded-full hover:bg-green-400">Get Offer</button>
+                            </div>
+                        </div>
+                        `;
+
+                        container.appendChild(cardElement);
+                    });
+                }
+
+                function toggleHeart2(index) {
+                    const heartIcon = document.getElementById(`heartIcon2_${index}`);
+                    heartIcon.classList.toggle("text-red-500");
+                }
+
+                function showInfoBox2(index) {
+                    const infoBox = document.getElementById(`infoBox2_${index}`);
+                    infoBox.classList.remove('opacity-0', 'invisible');
+                    infoBox.classList.add('opacity-100', 'visible');
+                }
+
+                function hideInfoBox2(index) {
+                    const infoBox = document.getElementById(`infoBox2_${index}`);
+                    infoBox.classList.add('opacity-0', 'invisible');
+                    infoBox.classList.remove('opacity-100', 'visible');
+                }
+
+                function showModal2(index) {
+                    const modal = document.getElementById(`locationModal2_${index}`);
+                    modal.classList.remove('hidden');
+                }
+
+                function hideModal2(index) {
+                    const modal = document.getElementById(`locationModal2_${index}`);
+                    modal.classList.add('hidden');
+                }
+
+                generateCards2("cardsContainer2");
+            </script>
+        </div>
+
+        <div class=" px-28  py-16 border-b-2 border-gray-200 bg-white">
+            <div class=" grid grid-cols-2  bg-light-sage1 border-2 border-light-sage rounded-lg shadow-md">
+                <div class="h-[550px] relative flex items-center justify-center pl-[121px]">
+                    <div class="w-[386px] absolute z-10 h-auto">
+                        <img src="../docs/assets/image/iPhone 13 Pro Mockup Right View.png" alt="Image 2"
+                            class="w-full h-auto">
+                    </div>
+                    <div class="w-96 h-96 absolute z-0 rounded-full bg-light-sage2">
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center">
+                    <span class="text-6xl font-medium">Download Our App To Get Amazing <span
+                            class="text-text-color underline"> Deals</span></span>
+                    <span class="mt-[28px] mb-[38px] w-[370px] text-sm font-normal">Get new deals every day. Top deals
+                        have the
+                        best offers and share
+                        them with you. To avail of offers, find our app in the play store</span>
+                    <div class="flex">
+                        <img src="../docs/assets/image/Android-App-Icon-Black.png" alt="Google Play Store"
+                            class="w-40 h-12 mr-4">
+                        <img src="../docs/assets/image/Android-App-Icon-Black (1).png" alt="Google Play Store"
+                            class="w-40 h-12 mr-4">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div class="flex items-center py-8 justify-around">
+            </div>
+
+            <script>
+                const counterData = [
+                    { id: 'dealsCounter', label: 'Deals', target: 75000 },
+                    { id: 'retailerCounter', label: 'Retailers', target: 75000 },
+                    { id: 'userCounter', label: 'Active Users', target: 75000 },
+                    { id: 'downloadCounter', label: 'App Downloads', target: 75000 }
+                ];
+
+                function animateCounter(id, start, end, duration) {
+                    let current = start;
+                    const stepTime = Math.abs(Math.floor(duration / (end - start)));
+                    const counterElement = document.getElementById(id);
+
+                    const interval = setInterval(function () {
+                        current += 100;
+                        counterElement.textContent = `${current.toLocaleString()}`;
+                        if (current === end) {
+                            clearInterval(interval);
+                        }
+                    }, stepTime);
+                }
+
+
+                function generateCounters() {
+                    const container = document.querySelector('.flex.items-center.justify-around');
+
+                    counterData.forEach(data => {
+                        const counterDiv = document.createElement('div');
+                        counterDiv.classList.add('flex', 'flex-col', 'text-center');
+
+                        const numberSpan = document.createElement('span');
+                        numberSpan.id = data.id;
+                        numberSpan.classList.add('text-3xl', 'font-semibold', 'text-green-500');
+                        numberSpan.textContent = '0';
+                        counterDiv.appendChild(numberSpan);
+
+                        const labelSpan = document.createElement('span');
+                        labelSpan.classList.add('text-lg');
+                        labelSpan.textContent = data.label;
+                        counterDiv.appendChild(labelSpan);
+                        container.appendChild(counterDiv);
+
+                        animateCounter(data.id, 0, data.target, 1500);
+                    });
+                }
+
+                window.onload = generateCounters;
+            </script>
+
+        </div>
+        <div class="h-48 bg-yellow flex items-center justify-center">
+            <div class="flex gap-x-10 items-center justify-center">
+                <div><span class="font-semibold text-2xl">For inquiries and more information</span></div>
+                <div>
+                    <button
+                        class="px-4 py-2 bg-green-800 text-white text-lg font-bold rounded-full hover:bg-green-400">Get
+                        in Touch</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-[184px] bg-red-300">
+          
+            <div id="map"></div>
+
+            <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+            <script>
+                mapboxgl.accessToken = 'AIzaSyC4vbeiurx5i8VjYzn-muTWLtKu23IfljQ';
+                const map = new mapboxgl.Map({
+                    container: 'map', 
+                    style: 'mapbox://styles/mapbox/streets-v11', 
+                    center: [-74.5, 40],
+                    zoom: 9 
+                });
+
+                map.addControl(new mapboxgl.NavigationControl());
+            </script>
+        </div>
+
+
+        <div>
+
+
+        </div>
+
+
+
+
+
+    </main>
+
+    <footer class="py-14  text-white">
+        <div class="flex flex-wrap  justify-around space-y-6 sm:space-y-0">
+            <div class="flex flex-col items-center">
+                <img src="../docs/assets/image/Deelly-Logo.png" alt="Logo" class="w-18 h-16 mb-4">
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <span class="text-black font-semibold text-xl">Top Deals</span>
+                <span class="text-black text-sm w-[284px]">
+                    Top Deals is an e-commerce site that connects businesses with customers by providing discounted
+                    offers, service coupons, or special offers.
+                    Top Deals brings a whole e-commerce platform for business owners and customers to save a lot of
+                    money.
+                </span>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <span class="text-black font-semibold text-xl">Our Company</span>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#" class="text-black hover:text-green-400">About Us</a></li>
+                    <li><a href="#" class="text-black hover:text-green-400">Contact Us</a></li>
+                    <li><a href="#" class="text-black hover:text-green-400">Privacy Policy</a></li>
+                    <li><a href="#" class="text-black hover:text-green-400">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <span class="text-black font-semibold text-xl">Our Payment Methods</span>
+                <div class="flex space-x-4">
+                    <div class="w-[61px] h-[44px]">
+
+                        <img src="../docs/assets/image/Clip path group (1).png" alt="Paypal" class="w-full h-auto">
+                    </div>
+                    <div class="w-[61px] h-[44px]">
+
+                        <img src="../docs/assets/image/Vector (2).png" alt="Visa" class="w-full h-auto">
+                    </div>
+                    <div class="w-[61px] h-[44px]">
+
+                        <img src="../docs/assets/image/Vector (3).png" alt="Mastercard" class="w-full h-auto">
+                    </div>
+                    <div class="w-[61px] h-[44px]">
+
+                        <img src="../docs/assets/image/Clip path group.png" alt="American Express"
+                            class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 px-14 pt-10 w-[20px] border-t-2 border-gray-200 flex items-center justify-between text-sm">
+            <div>
+
+                <p class="text-black">&copy; 2024 Top Deals. All rights reserved.</p>
+            </div>
+            <div class="flex gap-x-4">
+                <div class="w-[32px] h-[32px]">
+                    <img src="../docs/assets/image/facebook.png" alt="Facebook" class="w-full h-auto">
+                </div>
+                <div class="w-[32px] h-[32px]">
+                    <img src="../docs/assets/image/twitter.png" alt="Facebook" class="w-full h-auto">
+                </div>
+                <div class="w-[32px] h-[32px]">
+                    <img src="../docs/assets/image/instagram2.png" alt="Facebook" class="w-full h-auto">
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script>
+        console.log('Inline script in HTML is running');
+        function changeLanguage(language) {
+            document.getElementById('english').classList.remove('font-bold', 'text-white');
+            document.getElementById('french').classList.remove('font-bold', 'text-white');
+
+            if (language === 'English') {
+                document.getElementById('english').classList.add('font-bold', 'text-white');
+            } else if (language === 'French') {
+                document.getElementById('french').classList.add('font-bold', 'text-white');
+            }
+
+            document.getElementById('selectedLanguage').innerText = `Selected Language: ${language}`;
+        }
+
+        const menuItems = [
+            { icon: 'fa-house', text: 'Home' },
+            { icon: 'fa-utensils', text: 'Dining' },
+            { icon: 'fa-spa', text: 'Salon/Spa' },
+            { icon: 'fa-film', text: 'Entertainment' },
+            { icon: 'fa-tools', text: 'Home Services' }
+        ];
+
+        const menuList = document.getElementById('menuList');
+
+        menuItems.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.className = 'flex items-center space-x-1';
+
+            listItem.innerHTML = `
+            <i class="fa-solid ${item.icon} text-black text-green-800 space-x-6"></i>
+            <a href="#" class="text-black hover:text-gray-200">${item.text}</a>
+        `;
+
+            menuList.appendChild(listItem);
+        });
+
+
+
+        const items = [
+            { imgSrc: '../docs/assets/image/Dinning 1.png', text: 'Dining', bgColor: 'bg-green-200' },
+            { imgSrc: '../docs/assets/image/image 82447.png', text: 'Salon', bgColor: 'bg-blue-200' },
+            { imgSrc: '../docs/assets/image/popcorn.png', text: 'Spa', bgColor: 'bg-yellow-200' },
+            { imgSrc: '../docs/assets/image/clean.png', text: 'Entertainment', bgColor: 'bg-red-200' },
+            { imgSrc: '../docs/assets/image/clean.png', text: 'Home Services', bgColor: 'bg-purple-200' },
+            { imgSrc: '../docs/assets/image/clean.png', text: 'Relaxation', bgColor: 'bg-teal-200' },
+            { imgSrc: '../docs/assets/image/clean.png', text: 'Activities', bgColor: 'bg-pink-200' }
+        ];
+
+        function generateItems() {
+            const container = document.getElementById('item-container');
+
+            items.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('flex', 'flex-col', 'items-center');
+
+                const imageWrapper = document.createElement('div');
+                imageWrapper.classList.add('w-28', 'h-28', item.bgColor, 'rounded-full', 'flex', 'items-center', 'justify-center', 'overflow-hidden');
+                const img = document.createElement('img');
+                img.src = item.imgSrc;
+                img.alt = item.text;
+                img.classList.add('w-18', 'h-18', 'object-cover');
+                imageWrapper.appendChild(img);
+
+                const text = document.createElement('p');
+                text.classList.add('mt-2', 'text-center');
+                text.innerText = item.text;
+
+                itemDiv.appendChild(imageWrapper);
+                itemDiv.appendChild(text);
+                container.appendChild(itemDiv);
+            });
+        }
+
+        generateItems();
+
+        document.getElementById("heartBtn").addEventListener("click", function () {
+            const heartIcon = document.getElementById("heartIcon");
+            heartIcon.classList.toggle("text-red-500");
+            heartIcon.classList.toggle("text-white");
+        });
+
+        document.getElementById("seeMoreBtn").addEventListener("click", function () {
+            document.getElementById("locationModal").classList.remove("hidden");
+        });
+
+        document.getElementById("closeModalBtn").addEventListener("click", function () {
+            document.getElementById("locationModal").classList.add("hidden");
+        });
+
+    </script>
+
+
+</body>
+
+</html>
